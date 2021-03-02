@@ -4,7 +4,7 @@ z = 0;
 zz = 0;
 died = false;
 hs = 0;
-d= true;
+d= true; 
 ghs="";
 rid="";
 

@@ -10,7 +10,8 @@ rid = "";
 paused = false;
 
 function setup() {
-  createCanvas(600, 700);
+  var renderer createCanvas(600, 700);
+  renderer.parent("left");
   rectMode(CENTER);
   if (document.cookie.includes("rid")) {
     rid = document.cookie.split("rid=")[1].split("; ")[0];

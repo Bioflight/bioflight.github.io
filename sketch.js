@@ -6,7 +6,7 @@ died = false;
 hs = 0;
 d = true;  
 ghs = ""; 
-rid = ""; 
+rid = "";  
 paused = true;
 start = false;
 

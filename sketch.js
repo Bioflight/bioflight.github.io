@@ -1,4 +1,4 @@
-objects = [new Ball(300, 400), new BulletSource(20, 400)];
+objects = [new Ball(300, 400), new BulletSource(5, 400)];
 bscore = 10;
 z = 0;
 zz = 0;

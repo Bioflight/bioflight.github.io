@@ -147,7 +147,7 @@ function draw() {
       text("Press P To Start", width / 2 - 115, height / 2 + 30);
       textSize(20);
     }else{
-      background(100, 0, 0);
+      background(100, 0, 100);
       textSize(50);
       text("Paused", width / 2 - 120, height / 2 - 20);
       textSize(30);

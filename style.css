@@ -12,6 +12,7 @@ canvas {
   border-color: grey;
 } 
 #right {
+  margin: 10px;
   float: left;
 }
 #left {

@@ -29,7 +29,7 @@ function Vec2(x, y) {
 
 function BulletSource(x, y) {
   this.pos = new Vec2(x, y);
-  this.bullets = []; // make a new class 4 dis
+  this.bullets = []; // make a new class 4 dis 
   this.tick = function() {
     if (!died&& !paused) {
       if (frameCount % 2 == 0) this.bullets.push(new Bullet(this.pos.x, this.pos.y));

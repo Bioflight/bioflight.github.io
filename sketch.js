@@ -5,7 +5,7 @@ zz = 0;
 died = false;
 hs = 0;
 d = true; 
-ghs = "";
+ghs = ""; 
 rid = ""; 
 paused = false;
 

@@ -12,5 +12,15 @@ canvas {
   border-color: grey;
 } 
 #right {
-  float: right;
+  float: left;
+}
+#left {
+    display: inline-block;
+    float: left;
+}
+#container {
+    position: fixed;
+    left: 0px;
+    padding: 0;
+    margin: 0;
 }

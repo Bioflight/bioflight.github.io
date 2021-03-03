@@ -8,6 +8,8 @@ html, body {
 canvas {
   display: block;
   float: left;
+  border-style: solid;
+  border-color: grey;
 }
 #right {
   float: right;

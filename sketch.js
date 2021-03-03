@@ -4,18 +4,19 @@ z = 0;
 zz = 0;
 died = false;
 hs = 0;
-d= true; 
-ghs="";
-rid="";
+d = true;
+ghs = "";
+rid = "";
+paused = false;
 
 function setup() {
   createCanvas(600, 700);
   rectMode(CENTER);
-  if(document.cookie.includes("rid")){
+  if (document.cookie.includes("rid")) {
     rid = document.cookie.split("rid=")[1].split("; ")[0];
-  }else{
-  rid= String.fromCharCode(random(33,121))+String.fromCharCode(random(33,121))+String.fromCharCode(random(33,121))+String.fromCharCode(random(33,121))
-  document.cookie = "rid="+rid+"; ";
+  } else {
+    rid = String.fromCharCode(random(33, 121)) + String.fromCharCode(random(33, 121)) + String.fromCharCode(random(33, 121)) + String.fromCharCode(random(33, 121))
+    document.cookie = "rid=" + rid + "; ";
   }
 }
 
@@ -28,7 +29,7 @@ function BulletSource(x, y) {
   this.pos = new Vec2(x, y);
   this.bullets = []; // make a new class 4 dis
   this.tick = function() {
-    if (!died) {
+    if (!died&& !paused) {
       if (frameCount % 2 == 0) this.bullets.push(new Bullet(this.pos.x, this.pos.y));
       this.pos.y = frameCount % 800;
     }
@@ -37,7 +38,7 @@ function BulletSource(x, y) {
 
     Array.from(this.bullets).forEach(function(i, j) {
       i.createParticle();
-      if(!died){
+      if (!died&& !paused) {
         i.moveParticle();
         if (i.y > height || i.y < 0 || i.x > width) {
           this.bullets.splice(j, 1);
@@ -72,17 +73,17 @@ function Ball(x, y) {
   this.tick = function() {
     this.particles.push(new Particle(this.pos.x, this.pos.y));
     objects[1].bullets.forEach(function(i) {
-      if (dist(i.x, i.y, this.pos.x, this.pos.y) < i.r && i.g != 5 &&!died) {
+      if (dist(i.x, i.y, this.pos.x, this.pos.y) < i.r && i.g != 5 && !died&& !paused) {
         bscore--;
         z = 255;
-      } else if (dist(i.x, i.y, this.pos.x, this.pos.y) < i.r && i.g == 5&&!died) {
+      } else if (dist(i.x, i.y, this.pos.x, this.pos.y) < i.r && i.g == 5 && !died&& !paused) {
         this.boosts++;
         bscore++;
         zz = 255;
 
       }
     }, this);
-    if (!died) {
+    if (!died&& !paused) {
       this.vel.x += this.acc.x;
       this.vel.y += this.acc.y;
       this.pos.x += this.vel.x;
@@ -121,6 +122,9 @@ function keyPressed() {
       objects[0].boosts--;
     }
   }
+  if (keyCode == 80) {
+    paused = !paused;
+  }
 }
 
 function draw() {
@@ -131,33 +135,41 @@ function draw() {
     i.tick();
 
   });
+  if (paused){
+    background(100, 0, 0);
+    textSize(50);
+    text("Paused", width / 2 - 120, height / 2 - 20);
+    textSize(30);
+    text("Press P To Continue", width / 2 - 115, height / 2 + 30);
+    textSize(20);
+  }
   if (bscore < 1) {
-    if(d&&hs<objects[0].boosts){
-      hs=objects[0].boosts
-      fetch("https://pekopekolanddb.locknessko.repl.co/?n="+rid+"&s="+hs)
-      fetch("https://pekopekolanddb.locknessko.repl.co/s").then(x => x.text()).then(y => ghs=y);
+    if (d && hs < objects[0].boosts) {
+      hs = objects[0].boosts
+      fetch("https://pekopekolanddb.locknessko.repl.co/?n=" + rid + "&s=" + hs)
+      fetch("https://pekopekolanddb.locknessko.repl.co/s").then(x => x.text()).then(y => ghs = y);
     }
-    d=false;
+    d = false;
     background(100, 0, 0);
     died = true;
     textSize(50);
-    text("You Died",width/2-120,height/2-20);
+    text("You Died", width / 2 - 120, height / 2 - 20);
     textSize(30);
-    text("Click to Restart",width/2-115,height/2+30);
+    text("Click to Restart", width / 2 - 115, height / 2 + 30);
     textSize(20);
-    
-    text("Leaderboard\n"+ghs,width/2-115,height/2+80);
-    if(mouseIsPressed){
+
+    text("Leaderboard\n" + ghs, width / 2 - 115, height / 2 + 80);
+    if (mouseIsPressed) {
       bscore = 10;
       z = 255;
-      
-      zz=200;
+
+      zz = 200;
       died = false;
-      objects[0].boosts=10;
-      objects[0].pos.x = width/2;
-      
-      objects[0].pos.y = height/2;
-      d=true;
+      objects[0].boosts = 10;
+      objects[0].pos.x = width / 2;
+
+      objects[0].pos.y = height / 2;
+      d = true;
     }
   }
   objects.forEach(function(i, j) {

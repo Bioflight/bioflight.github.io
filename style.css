@@ -6,7 +6,6 @@ html, body {
   font-family: 'Montserrat', sans-serif;
 }
 canvas {
-  display: block;
   float: left;
 }
 #right {

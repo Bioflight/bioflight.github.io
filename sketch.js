@@ -11,7 +11,12 @@ rid="";
 function setup() {
   createCanvas(600, 700);
   rectMode(CENTER);
+  if(document.cookie.includes("rid")){
+    rid = document.cookie.split("rid=")[1].split("; ")[0];
+  }else{
   rid= String.fromCharCode(random(33,121))+String.fromCharCode(random(33,121))+String.fromCharCode(random(33,121))+String.fromCharCode(random(33,121))
+  document.cookie = "rid="+rid+"; ";
+  }
 }
 
 function Vec2(x, y) {

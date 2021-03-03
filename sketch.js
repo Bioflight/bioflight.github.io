@@ -7,7 +7,8 @@ hs = 0;
 d = true; 
 ghs = ""; 
 rid = ""; 
-paused = false;
+paused = true;
+start = false;
 
 function setup() {
   var renderer= createCanvas(600, 700);
@@ -125,6 +126,7 @@ function keyPressed() {
   }
   if (keyCode == 80) {
     paused = !paused;
+    start = true;
   }
 }
 
@@ -137,12 +139,21 @@ function draw() {
 
   });
   if (paused){
-    background(100, 0, 0);
-    textSize(50);
-    text("Paused", width / 2 - 120, height / 2 - 20);
-    textSize(30);
-    text("Press P To Continue", width / 2 - 115, height / 2 + 30);
-    textSize(20);
+    if (!start){
+      background(10, 100, 100);
+      textSize(50);
+      text("Bioflight", width / 2 - 120, height / 2 - 20);
+      textSize(30);
+      text("Press P To Start", width / 2 - 115, height / 2 + 30);
+      textSize(20);
+    }else{
+      background(100, 0, 0);
+      textSize(50);
+      text("Paused", width / 2 - 120, height / 2 - 20);
+      textSize(30);
+      text("Press P To Continue", width / 2 - 115, height / 2 + 30);
+      textSize(20);
+    }
   }
   if (bscore < 1) {
     if (d && hs < objects[0].boosts) {

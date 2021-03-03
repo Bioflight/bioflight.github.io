@@ -7,7 +7,7 @@ html, body {
 }
 canvas {
   display: block;
-  float: left;
+  float: left; 
   border-style: solid;
   border-color: grey;
 } 
